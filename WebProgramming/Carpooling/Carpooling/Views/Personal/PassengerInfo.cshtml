@@ -1,0 +1,34 @@
+﻿@using Carpooling.Models;
+
+@model PassengerViewInfoModel
+
+@{
+    ViewData["Title"] = "Passenger Info";
+}
+
+
+<div>
+    <h2>User, @Model.Username!</h2>
+    <h5>Profile Details:</h5>
+    <br>
+    <p><i class="fas fa-star"></i> Rating: @Model.AverageRating</p>
+    <p><i class="fas fa-comments"></i> Feedbacks: @Model.Feedbacks.Count()</p>
+
+    @foreach (var feedback in Model.Feedbacks)
+    {
+        <div class="feedback-container">
+            <div class="feedback-details">
+                <p class="feedback-comment">@feedback.Passenger.UserName - feedback based on realised ride:</p>
+               
+            </div>
+            <p>@feedback.Comment</p>
+            <p class="feedback-date">@feedback.CreatedOn.ToString("dd. MMM. yyyy.")</p>
+        </div>
+        <hr /> 
+    }
+@*    <a asp-controller="Home" asp-action="Index" class="nav">Go back</a>*@
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Go Back</a>
+</div>
+
+
+

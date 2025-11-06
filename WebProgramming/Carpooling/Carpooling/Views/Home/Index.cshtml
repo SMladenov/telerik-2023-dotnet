@@ -1,0 +1,153 @@
+﻿
+@using Carpooling.Models;
+@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div>
+
+
+    <div class="info-container">
+        <div class="info-box">
+            <i class="fas fa-route"></i>
+            <h1>@Model.TotalTravelCount</h1>
+            <p>Total Travels</p>
+        </div>
+        <div class="info-box">
+            <i class="fas fa-users"></i>
+            <h1>@Model.TotalUsersCount</h1>
+            <p>Total Users</p>
+        </div>
+    </div>
+
+
+
+    <h2 class="my-section-title">Top 10 Organizer</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.TopTravelOrganizers)
+            {
+                <tr>
+                    <td>
+                      @*  @if (User.Identity?.IsAuthenticated == true)
+                        {*@
+                            <a href="@Url.Action("DriverInfo", "Personal" , new { id = @user.Id })">@user.UserName</a>
+                      @*  }
+                        else
+                        {
+                            <a href="/Identity/Account/Login">@user.UserName</a>
+                        }*@
+                    </td>
+                    <td>@user.AverageRating</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2 class="my-section-title">Top 10 Passengers</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.TopPassengers)
+            {
+                <tr>
+                    <td>
+                   @*     @if (User.Identity?.IsAuthenticated == true)
+                        {*@
+                            <a href="@Url.Action("PassengerInfo", "Personal" , new { id = @user.Id })">@user.UserName</a>
+                    @*    }
+                        else
+                        {
+                            <a href="/Identity/Account/Login">@user.UserName</a>
+                        }*@
+                    </td>
+                    <td>@user.AverageRating</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div>
+
+    <h1>Total Travel Count: @Model.TotalTravelCount</h1>
+    <h1>Total Users Count: @Model.TotalUsersCount</h1>
+    <br>
+
+    <h2 class="my-section-title">Top 10 Organizer</h2>
+
+
+    @foreach (var user in Model.TopTravelOrganizers)
+    {
+        <div class="row">
+            <div>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a class="row clickable-row" href="@Url.Action("DriverInfo", "Personal" , new { id = @user.Id })">
+                        <div class="cell">@user.UserName</div>
+                    </a>
+                }
+                else
+                {
+                    <a class="row clickable-row" href="/Identity/Account/Login">
+                        <div class="cell">@user.UserName</div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+    <h2 class="my-section-title">10 Passengers</h2>
+    @foreach (var user in Model.TopPassengers)
+    {
+        <div class="row">
+            <div>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a class="row clickable-row" href="@Url.Action("PassengerInfo", "Personal" , new { id = @user.Id })">
+                        <div class="cell">@user.UserName</div>
+                    </a>
+                }
+                else
+                {
+                    <a class="row clickable-row" href="/Identity/Account/Login">
+                        <div class="cell">@user.UserName</div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+</div>
+*@
+

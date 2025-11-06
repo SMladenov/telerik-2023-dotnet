@@ -1,0 +1,246 @@
+
+.info-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.info-box {
+    text-align: center;
+    padding: 10px;
+    border: none;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    .info-box i {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    .info-box h1 {
+        font-size: 20px;
+        margin: 0;
+        transition: color 0.3s;
+    }
+
+    .info-box p {
+        font-size: 14px;
+        margin: 0;
+        color: #666;
+        transition: color 0.3s;
+    }
+
+    .info-box:hover {
+        background-color: #3498db;
+        transform: scale(1.1);
+    }
+
+        .info-box:hover h1,
+        .info-box:hover p {
+            color: #fff;
+        }
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #3498db;
+    outline: none;
+    font-size: 16px;
+    transition: border-bottom-color 0.3s;
+}
+
+    .search-form input[type="text"]:focus {
+        border-bottom-color: #2980b9;
+    }
+
+.search-form .btn-search {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+    .search-form .btn-search:hover {
+        background-color: #2980b9;
+    }
+
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Стилове за списъка с пътувания */
+.travel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.travel-item {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+    .travel-item.header {
+        font-weight: bold;
+        background-color: #ddd;
+    }
+
+    .travel-item:hover {
+        background-color: #ddd;
+    }
+
+.start-end-locations {
+    display: flex;
+    align-items: center;
+}
+
+.location {
+    margin-right: 5px;
+}
+
+.divider {
+    margin: 0 5px;
+}
+
+.departure-time,
+.driver {
+    text-align: right; /* Променено на "right" за позициониране в дясно */
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.travel-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.property {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+
+
+/*За diverInfo car x-ms-webview infoto  */
+
+.car-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.car-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 250px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .car-card h3 {
+        margin-top: 0;
+    }
+
+.car-details {
+    margin-top: 10px;
+}
+
+    .car-details p {
+        margin: 5px 0;
+    }
+
+.fas {
+    margin-right: 5px;
+}
+
+
+/*стилове за показване на фийдбеците на passengers и drivers*/
+.feedback-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feedback-comment {
+    font-weight: bold;
+}
+
+.feedback-date {
+    text-align: right;
+}
+
+/*Стилове за Travel panel-a*/
+.user-menu {
+    background-color: #3498db;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.user-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-menu li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.user-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+    .user-menu a:hover {
+        color: #f39c12;
+    }
+
+
+
+

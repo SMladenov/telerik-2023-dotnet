@@ -1,0 +1,113 @@
+﻿@using CarPooling.Data.Models.Pagination;
+@using CarPooling.Data.Models;
+@using Carpooling.PaginationHelper;
+@using Carpooling.Service.Dto_s.Responses;
+
+@{
+    this.ViewData["Title"] = "Travels";
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+    
+}
+
+@model IEnumerable<Travel>
+<form asp-controller="Travels" asp-action="Index" method="get">
+    <div class="input-group mb-3">
+        <input type="text" name="searchQuery" class="form-control" placeholder="Search by Start Location, End Location, or UserName." />
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </div>
+    @if (User.IsInRole("Administrator"))
+    {
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="sortBySelect">Sort By</label>
+            </div>
+            <select class="custom-select" id="sortBySelect" name="sortBy">
+                <option value="id" selected="@(ViewBag.SortBy == "id")">Default</option>
+                <option value="startlocation" selected="@(ViewBag.SortBy == "startlocation")">Start Location</option>
+                <option value="endlocation" selected="@(ViewBag.SortBy == "endlocation")">End Location</option>
+                <option value="departuretime" selected="@(ViewBag.SortBy == "departuretime")">Departure Time</option>
+                <option value="arrivaltime" selected="@(ViewBag.SortBy == "arrivaltime")">Arrival Time</option>
+            </select>
+            <input type="hidden" name="sortBy" value = "@ViewBag.SortBy" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Apply</button>
+            </div>
+        </div>
+    }
+</form>
+@if (!Model.Any())
+{
+    <br>
+    <h3 class="no-results">No results</h3>
+}
+else
+{
+    <div class="travel-list">
+        <div class="travel-item header">
+            <div class="start-end-locations">
+                <div class="label">Start/</div>
+                <div class="label">End Location</div>
+            </div>
+            <div class="label" style="text-align: center;">Departure Time</div>
+            <div class="label" style="text-align: right;">Arrival Time</div>   
+            <div class="label" style="text-align: right;">Driver</div>
+        </div>
+        @foreach (var travel in Model)
+        {
+            <a class="travel-item" href="@Url.Action("Details", "Travels", new { id = travel.Id })">
+                <div class="start-end-locations">
+                    <div class="location">@travel.StartLocation.City</div>
+                    <div class="divider">-</div>
+                    <div class="location">@travel.EndLocation.City</div>
+                </div>
+                <div class="departure-time" style="text-align: center;">@travel.DepartureTime</div>
+                <div class="arrival-time" style="text-align: right;">@travel.ArrivalTime</div>      
+                <div class="driver" style="text-align: right;">@travel.Driver?.UserName</div>
+            </a>
+        }
+    </div>
+    <div class="container">
+        @if (pager.TotalPages > 0)
+        {    
+            <ul class="pagination justify-content-end">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Travels" asp-action="Index" asp-route-pg="1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Travels" asp-action="Index" asp-route-pg="@(pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                {
+                    <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" asp-controller="Travels" asp-action="Index" asp-route-pg="@pge" asp-route-sortBy="@ViewBag.SortBy">@pge</a>
+                    </li>
+                }
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Travels" asp-action="Index" asp-route-pg="@(pager.CurrentPage+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Travels" asp-action="Index" asp-route-pg="@(pager.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}
+
+
+

@@ -1,0 +1,72 @@
+﻿@using CarPooling.Data.Models;
+@using Carpooling.Models;
+@using Carpooling.Service.Dto_s.Responses;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<User> UserManager
+@{
+    this.ViewData["Title"] = "Details";
+    var user = await UserManager.GetUserAsync(User);
+}
+@model TravelResponse
+
+
+<div class="travel-container">
+    <h2>Travel Details</h2>
+    <br>
+    <p><i class="fas fa-map-marker-alt"></i> <span class="property">Start Location:</span> @Model.StartLocationName</p>
+    <p><i class="fas fa-flag"></i> <span class="property">Destination:</span> @Model.DestinationName</p>
+    <p><i class="fas fa-calendar"></i> <span class="property">Departure Time:</span> @Model.DepartureTime.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><i class="fas fa-clock"></i> <span class="property">Estimated Time Of Arrival:</span> @Model.ArrivalTime.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><i class="fas fa-chair"></i> <span class="property">Available Seats:</span> @Model.AvailableSeats</p>
+    <p><i class="fas fa-check-circle"></i> <span class="property">Is Complete:</span> @(Model.IsCompleted ? "Yes" : "No")</p>
+    <p><i class="fas fa-car"></i> <span class="property">Car Registration:</span> @Model.CarRegistration</p>
+    <p><i class="fas fa-car"></i> <span class="property">Distance Between Destinations In Kms:</span> @Model.DistanceBetweenDestinations KM</p>
+</div>
+</br>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="create-request-button" style="text-align: left;">
+        @if (this.Model.IsCompleted == true || this.Model.ArrivalTime < DateTime.Now)
+        {
+            <p>Organised travel has already happened.</p>
+        }
+        else
+        {
+            @if (user.IsBlocked == true)
+            {
+                <h3>You have been blocked! You cannot create trip requests!</h3>
+            }
+            else
+            {
+                @if (this.Model.AvailableSeats > 0)
+                {
+                    <a asp-controller="Personal" asp-action="CreateTripRequest" asp-route-id="@this.ViewBag.id" class="btn btn-success">Create Trip Request</a>
+                }
+                else
+                {
+                    <p>Unfortunately there are no available seats :(</p>
+                }
+            }
+        }
+        <a asp-controller="Travels" asp-action="Index" class="btn btn-success">Go Back</a>
+    </div>
+}
+
+
+
+
+
+
+
+@*<div class="travel-container">
+    <h2>Travel Details</h2>
+    <p><span class="property">Start Location:</span> @Model.StartLocationName</p>
+    <p><span class="property">Destination:</span> @Model.DestinationName</p>
+    <p><span class="property">Departure Time:</span> @Model.DepartureTime.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><span class="property">Arrival Time:</span> @Model.ArrivalTime.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><span class="property">Available Seats:</span> @Model.AvailableSeats</p>
+    <p><span class="property">Is Complete:</span> @(Model.IsComplete ? "Yes" : "No")</p>
+    <p><span class="property">Car Registration:</span> @Model.CarRegistration</p>
+</div>*@
+
+

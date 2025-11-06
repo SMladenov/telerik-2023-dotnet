@@ -1,0 +1,22 @@
+﻿@{
+	this.ViewData["Title"] = "Edit";
+}
+@model PostViewModel
+
+<h2>@this.Model.Title</h2>
+<form asp-controller="Posts" asp-action="Edit" method="post">
+	<div>
+		<label asp-for="Title" class="form-label"></label>
+		<br />
+		<input asp-for="Title" type="text" class="form-input" />
+		<span asp-validation-for="Title" class="form-error"></span>
+	</div>
+	<div>
+		<label asp-for="Content" class="form-label"></label>
+		<br />
+		<input asp-for="Content" type="text" class="form-input" />
+		<span asp-validation-for="Content" class="form-error"></span>
+	</div>
+	<input type="submit" value="Save" class="btn-primary" />
+	<a asp-controller="Posts" asp-action="Index" class="nav">Back</a>
+</form>

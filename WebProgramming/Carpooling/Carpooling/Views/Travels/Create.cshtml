@@ -1,0 +1,79 @@
+﻿@using Carpooling.Models
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using CarPooling.Data.Models;
+@inject UserManager<User> UserManager
+@model TravelViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    await Html.RenderPartialAsync("_MenuPartial");
+}
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+
+<div><br></div>
+@if (user.IsBlocked == true)
+{
+    <h1>You have been blocked and you do not have permission to create a travel.</h1>
+}
+<h2>Create Travel</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <p><strong>Validation Error:</strong> Please correct the errors and try again.</p>
+    </div>
+}
+
+<form asp-controller="Travels" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="CityStartDest">Start Location for City</label>
+        <input asp-for="CityStartDest" class="form-control" />
+        <span asp-validation-for="CityStartDest" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CityEndDest">End Location for City</label>
+        <input asp-for="CityEndDest" class="form-control" />
+        <span asp-validation-for="CityEndDest" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Country"></label>
+        <input asp-for="Country" class="form-control" />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureTime">Departure Time</label>
+        <input asp-for="DepartureTime" class="form-control" />
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AvailableSeats">Available Seats</label>
+        <input asp-for="AvailableSeats" class="form-control" />
+        <span asp-validation-for="AvailableSeats" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CarRegistration">Car Registration</label>
+        <input asp-for="CarRegistration" class="form-control" />
+        <span asp-validation-for="CarRegistration" class="text-danger"></span>
+    </div>
+    </br>
+    </br>
+    @if (user.IsBlocked == true)
+    {
+        <p></p>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Create Travel</button>
+    }
+    <a asp-action="Menu" asp-controller="Personal" class="btn btn-secondary">Back</a>
+</form>
+
+
+        
