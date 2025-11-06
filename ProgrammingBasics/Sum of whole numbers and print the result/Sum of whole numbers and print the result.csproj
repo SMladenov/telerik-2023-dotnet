@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Sum_of_whole_numbers_and_print_the_result</RootNamespace>
+  </PropertyGroup>
+
+</Project>
